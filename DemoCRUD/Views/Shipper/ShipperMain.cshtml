@@ -1,0 +1,136 @@
+﻿@model DemoCRUD.Models.ShipperViewModel
+@{
+    ViewBag.Title = "ShipperMain";
+}
+
+<h2>ShipperMain</h2>
+
+@section scripts
+{
+    <script type="text/javascript" src="@Url.Content("../Scripts/Shipper/Shipper.js")"></script>
+}
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span>查詢條件</span>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("ShipperMain", "Shipper", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "ConitionArea", style = "" }))
+            {
+                <div class="form-group" style="">
+                    <label class="control-label col-xs-2" for="txtPhone">Phone:</label>
+                    <div class="col-xs-4">
+                        @Html.TextBoxFor(c => c.condition.Phone, new { @class = "form-control", id = "txtPhone", style = "width:70%;display:inline" })
+                        <span>部分搜尋</span>
+
+                    </div>
+                    <label class="control-label col-xs-2" for="txtCompanyName">CompanyName:</label>
+                    <div class="col-xs-4">
+                        @Html.TextBoxFor(c => c.condition.CompanyName, new { @class = "form-control", id = "txtCompanyName", style = "width:70%;display:inline"})
+                        <span>部分搜尋</span>
+                    </div>
+                </div>
+                    
+                <div class="form-group" style="">
+                    
+                    <div class="col-xs-3">                        
+                        <button type="button" id="btnSearch" class="btn ">Search</button>
+                    </div>
+                </div>                                
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default" style="margin-top:5px;margin-bottom:5px;">
+        <div class="panel-heading">新增資料</div> 
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group" style="">
+                    <label class="control-label col-xs-2" for="txtPhone">Phone:</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" id="txtAddPhone" value="" style="width:70%;display:inline"/>                        
+                    </div>
+                    <label class="control-label col-xs-2" for="txtCompanyName">CompanyName:</label>
+                    <div class="col-xs-4">                        
+                        <input type="text" class="form-control" id="txtAddCompanyName" value="" style="width:70%;display:inline" />
+                    </div>
+                </div>
+                <div class="form-group" style="">
+                    <div class="col-xs-11 ">
+                        <button type="button" id="btnADD" class="btn" onclick="return AddShipper();">確定新增</button>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><span>查詢結果</span></div>
+        <div class="panel-body">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr style="">
+                        <th style="width:10%;"><span style="">功能</span></th>
+                        <th style="width:30%;"><span style="">ShipperID</span></th>
+                        <th style="width:30%;"><span style="">CompanyName</span></th>
+                        <th style="width:30%;"><span style="">Phone</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ShipperGridViewItem item in Model.dataSource)
+                    {
+                        <tr class="tr_setting">
+                            <td style="width:10%;">
+                                <span style="cursor: pointer;" onclick="return EditShipper('@(item.ShipperID)','@(item.CompanyName)','@(item.Phone)');">修改</span>
+                                <span style="cursor: pointer;" onclick="return DeleteShipper('@(item.ShipperID)');">刪除</span>
+                            </td>
+                            <td style="width:30%"><span>@(item.ShipperID)</span></td>
+                            <td style="width:30%"><span>@(item.CompanyName)</span></td>
+                            <td style="width:30%"><span>@(item.Phone)</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div id="diaEditShipper" title="">
+        <div class="row">
+            <div class="col-xs-12" style="">
+                <div class="panel panel-default" style="margin-top:5px;margin-bottom:5px;">
+                    <div class="panel-heading">Edit Shipper</div>
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <div class="form-group" style="">
+                                <label class="control-label col-xs-2" style="display:inline">ShipperID:</label>
+                                <label class="control-label col-xs-2" style="display:inline" id="editShipperID"></label>
+                            </div>
+                            <div class="form-group" style="">
+                                <label class="control-label col-xs-2" for="txtEditPhone">Phone:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="txtEditPhone" value="" style="width:70%;display:inline" />
+                                </div>
+                                <label class="control-label col-xs-2" for="txtEditCompanyName">CompanyName:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="txtEditCompanyName" value="" style="width:70%;display:inline" />
+                                </div>
+                            </div>
+                            <div class="form-group" style="">
+                                <div class="col-xs-11 ">
+                                    <button type="button" id="btnEdit" class="btn" onclick="return SaveEditShipper();">確定修改</button>
+                                    <button type="button" id="btnEdit" class="btn" onclick="return CancelEdit();">取消修改</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

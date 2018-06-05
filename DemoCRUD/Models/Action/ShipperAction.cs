@@ -1,11 +1,12 @@
 ﻿using Omu.ValueInjecter;
 using System;
 using System.Linq;
+using System.Web.Mvc;
 using static DemoCRUD.CommonUtility.CommonUtility;
 
 namespace DemoCRUD.Models
 {
-    public class ShipperAction
+    public class ShipperAction : Controller
     {
         private NORTHWNDEntities db = new NORTHWNDEntities();
 
@@ -102,7 +103,6 @@ namespace DemoCRUD.Models
             return result;
         }
 
-
         public ResultObject DeleteShipper(String delShipperID)
         {
             ResultObject result = new ResultObject();
@@ -132,6 +132,15 @@ namespace DemoCRUD.Models
                 result.ReturnMessage = ex.Message;
             }
             return result;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
     }

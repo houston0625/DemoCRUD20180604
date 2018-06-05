@@ -22,7 +22,6 @@ namespace DemoCRUD.Models
     public class ShipperViewModel
     {
         public ShipperCondition condition { get; set; }
-        //public IPagedList<ShipperGridViewItem> dataSource { get; set; }
         public List<ShipperGridViewItem> dataSource { get; set; }
     }
 

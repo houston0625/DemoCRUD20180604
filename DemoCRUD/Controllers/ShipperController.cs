@@ -8,26 +8,18 @@ namespace DemoCRUD.Controllers
     public class ShipperController : Controller
     {
 
-
         public ActionResult ShipperMain(ShipperCondition condition)
         {
             ShipperAction action = new ShipperAction();
-            //ShipperCondition condition = new ShipperCondition();
             ShipperViewModel viewModel = action.SearchGridView(condition);
             return View(viewModel);
         }
 
         /// <summary>
-        /// Search 
+        /// 新增
         /// </summary>
-        /// <param name="condition"></param>
+        /// <param name="addItem"></param>
         /// <returns></returns>
-        //[HttpPost]
-        //public ActionResult ShipperMain(ShipperCondition condition)
-        //{
-        //    return View();
-        //}
-
         [HttpPost]
         public ActionResult AddShipper(AddViewModel addItem)
         {
@@ -40,6 +32,11 @@ namespace DemoCRUD.Controllers
             return Json(_result);
         }
 
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult EditShipper(EditViewModel item)
         {
@@ -52,6 +49,11 @@ namespace DemoCRUD.Controllers
             return Json(_result);
         }
 
+        /// <summary>
+        /// 刪除
+        /// </summary>
+        /// <param name="delShipperID"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult DeleteShipper(String delShipperID)
         {

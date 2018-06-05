@@ -203,6 +203,5 @@ D:\D\KW\DemoCRUD\DemoCRUD\bin\zh-Hant\Microsoft.Owin.Security.Twitter.resources.
 D:\D\KW\DemoCRUD\DemoCRUD\bin\zh-Hant\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 D:\D\KW\DemoCRUD\DemoCRUD\obj\Debug\DemoCRUD.dll
 D:\D\KW\DemoCRUD\DemoCRUD\obj\Debug\DemoCRUD.pdb
-D:\D\KW\DemoCRUD\DemoCRUD\obj\Debug\DemoCRUD.csprojResolveAssemblyReference.cache
 D:\D\KW\DemoCRUD\DemoCRUD\bin\Omu.ValueInjecter.dll
 D:\D\KW\DemoCRUD\DemoCRUD\bin\Omu.ValueInjecter.xml

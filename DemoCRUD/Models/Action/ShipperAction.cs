@@ -13,27 +13,6 @@ namespace DemoCRUD.Models
         {
             ShipperViewModel viewModel = new ShipperViewModel();
 
-            #region PageSize PageIndex
-            //int _pageSize = 10;
-            //int _pageIndex = 1;
-
-            //if (condition != null)
-            //{
-            //    if (!String.IsNullOrEmpty(condition.PageSize))
-            //    {
-            //        int.TryParse(condition.PageSize, out _pageSize);
-            //        _pageSize = _pageSize < 10 ? 10 : _pageSize;
-            //    }
-
-            //    //現在是第幾頁
-            //    if (!String.IsNullOrEmpty(condition.PageIndex))
-            //    {
-            //        int.TryParse(condition.PageIndex, out _pageIndex);
-            //        _pageIndex = _pageIndex < 1 ? 1 : _pageIndex;
-            //    }
-            //}
-            #endregion
-
             var query = from p in db.Shippers.AsQueryable()
                         select new ShipperGridViewItem
                         {
@@ -54,8 +33,6 @@ namespace DemoCRUD.Models
                 }
             }
 
-            //IPagedList<ShipperGridViewItem> _dataSource = query.ToPagedList(_pageIndex, _pageSize);
-
             viewModel.dataSource = query.ToList<ShipperGridViewItem>();
 
             if (condition != null)
@@ -65,10 +42,7 @@ namespace DemoCRUD.Models
             else
             {
                 viewModel.condition = new ShipperCondition();
-                //viewModel.condition.PageSize = _pageSize.ToString();
             }
-
-            //_dataSource = query.ToPagedList(_pageIndex, _pageSize);
 
             return viewModel;
         }
@@ -84,7 +58,6 @@ namespace DemoCRUD.Models
                 newShipper.InjectFrom(item);
                 db.Shippers.Add(newShipper);
                 db.SaveChanges();
-
             }
             catch (Exception ex)
             {
@@ -94,7 +67,6 @@ namespace DemoCRUD.Models
 
             return result;
         }
-        //public
 
         public ResultObject EditShipper(EditViewModel item)
         {
@@ -113,9 +85,14 @@ namespace DemoCRUD.Models
                 {
                     query.Phone = item.Phone;
                     query.CompanyName = item.CompanyName;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    result.ReturnCode = "999";
+                    result.ReturnMessage = "Error ShipperID!";
                 }
 
-                db.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -134,7 +111,6 @@ namespace DemoCRUD.Models
             int idelShipperID = Convert.ToInt32(delShipperID);
             try
             {
-
                 Shipper query = (from p in db.Shippers.AsQueryable()
                                  where p.ShipperID == idelShipperID
                                  select p).FirstOrDefault();
@@ -149,7 +125,6 @@ namespace DemoCRUD.Models
                     result.ReturnCode = "999";
                     result.ReturnMessage = "Error ShipperID!";
                 }
-
             }
             catch (Exception ex)
             {
